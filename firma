@@ -1,0 +1,35 @@
+package firma;
+
+import java.util.Scanner;
+import java.text.DecimalFormat;
+
+public class firma {
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		DecimalFormat df = new DecimalFormat("##.#");
+		int neobhodimiChasove = scanner.nextInt();
+		int dni = scanner.nextInt();
+		int broiSlujiteli = scanner.nextInt();
+		double procent = dni * (10.0f / 100.0f);
+		int izvunredni = broiSlujiteli * (2 * dni);
+		double chasoveZaRabota = ((dni - procent) * 8) + izvunredni;
+		long hoursNeededInt = Math.round((neobhodimiChasove - Math.floor(chasoveZaRabota)));
+		long hoursLeftInt = Math.round((Math.floor(chasoveZaRabota) - neobhodimiChasove));
+
+		if ((neobhodimiChasove < 0 || neobhodimiChasove > 200000) || (dni < 0 || dni > 20000)
+				|| (broiSlujiteli < 0 || broiSlujiteli > 200)) {
+			System.out.println("Изникна грешка във въведените стойности.");
+			scanner.close();
+			return;
+		}
+
+		if (chasoveZaRabota >= neobhodimiChasove) {
+			System.out.println("Yes!" + hoursLeftInt + " hours left!");
+		} else {
+			System.out.println("Not enough time! " + hoursNeededInt + " hours needed");
+		}
+
+		scanner.close();
+	}
+
+}
